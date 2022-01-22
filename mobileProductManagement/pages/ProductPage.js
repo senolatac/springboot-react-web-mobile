@@ -5,8 +5,7 @@ import {ListItem} from 'react-native-elements';
 import CustomHeader from '../components/header';
 import UserService from '../services/user.service';
 
-export default class ProductPage extends Component{
-
+export default class ProductPage extends Component {
   static navigationOptions = {
     header: null,
   };
@@ -17,7 +16,7 @@ export default class ProductPage extends Component{
     this.state = {
       products: [],
       loading: true,
-      title: "Product List",
+      title: 'Product List',
     };
   }
 
@@ -25,7 +24,7 @@ export default class ProductPage extends Component{
     UserService.findAllProducts().then(products => {
       this.setState({
         products: products.data,
-        loading: false
+        loading: false,
       });
     });
   }
@@ -34,10 +33,19 @@ export default class ProductPage extends Component{
     const {item} = itemProduct;
     return (
       <ListItem
-        title={<Text style={styles.productTitle}>{item.name + " ($ "+ item.price +")"}</Text>}
+        title={
+          <Text style={styles.productTitle}>
+            {item.name + ' ($ ' + item.price + ')'}
+          </Text>
+        }
         subtitle={item.explanation}
         leftIcon={{name: 'pin-drop'}}
-        onPress={()=> this.props.navigation.navigate('Detail', {productId:item.id, product:item})}
+        onPress={() =>
+          this.props.navigation.navigate('Detail', {
+            productId: item.id,
+            product: item,
+          })
+        }
         chevron
       />
     );
@@ -47,21 +55,22 @@ export default class ProductPage extends Component{
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.softContainer}>
-        <CustomHeader navigation={this.props.navigation} title={this.state.title}/>
-        {!this.state.loading &&
+        <CustomHeader
+          navigation={this.props.navigation}
+          title={this.state.title}
+        />
+        {!this.state.loading && (
           <FlatList
             data={this.state.products}
-            renderItem={(item)=>this.renderItem(item)}
+            renderItem={item => this.renderItem(item)}
           />
-        }
-        {this.state.loading &&
+        )}
+        {this.state.loading && (
           <View style={styles.form}>
-            <ActivityIndicator size="large" color="#0000ff"/>
+            <ActivityIndicator size="large" color="#0000ff" />
           </View>
-        }
+        )}
       </View>
     );
   }
-
-
 }

@@ -16,16 +16,16 @@ export default class App extends Component<Props> {
   }
 
   componentWillMount() {
-    this.listener = UserService.emitter.addListener('onLogin', (arg)=>{
+    this.listener = UserService.emitter.addListener('onLogin', arg => {
       var data = JSON.parse(arg.user);
       this.setState({
         currentUser: data,
-        isAdmin: data && data.role === Role.ADMIN
+        isAdmin: data && data.role === Role.ADMIN,
       });
     });
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.listener.remove();
   }
 
@@ -34,8 +34,6 @@ export default class App extends Component<Props> {
   }
 
   render() {
-    return (
-      <AppStack admin={this.state.isAdmin}/>
-    );
+    return <AppStack admin={this.state.isAdmin} />;
   }
 }

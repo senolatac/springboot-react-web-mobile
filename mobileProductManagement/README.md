@@ -16,7 +16,7 @@ Launches the test runner in the interactive watch mode.<br>
 
 To debug it on android.
 
-### `react-native run-ios`
+### `cd ios/ && pod install && cd ../ && react-native run-ios`
 
 To debug it on ios.
 

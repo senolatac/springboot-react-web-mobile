@@ -6,13 +6,15 @@ import AdminMenuStack from './menu.admin';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 
-const EntryStack = createStackNavigator({
-  Login: {screen: LoginPage},
-  Register: {screen: RegisterPage},
-},
-{
-  initialRouteName: 'Login'
-});
+const EntryStack = createStackNavigator(
+  {
+    Login: {screen: LoginPage},
+    Register: {screen: RegisterPage},
+  },
+  {
+    initialRouteName: 'Login',
+  },
+);
 
 export const RootStack = createStackNavigator(
   {
@@ -22,7 +24,7 @@ export const RootStack = createStackNavigator(
   {
     headerMode: 'none',
     initialRouteName: 'EntryStack',
-  }
+  },
 );
 
 export const RootAdminStack = createStackNavigator(
@@ -33,23 +35,23 @@ export const RootAdminStack = createStackNavigator(
   {
     headerMode: 'none',
     initialRouteName: 'MenuStack',
-  }
+  },
 );
 
 const UserStack = createAppContainer(RootStack);
 const AdminStack = createAppContainer(RootAdminStack);
 
 export default class AppStack extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
   render() {
-    const{admin} = this.props;
-    if(admin) {
-      return (<AdminStack/>);
-    }else{
-      return (<UserStack/>);
+    const {admin} = this.props;
+    if (admin) {
+      return <AdminStack />;
+    } else {
+      return <UserStack />;
     }
   }
 }
