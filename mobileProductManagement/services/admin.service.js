@@ -1,7 +1,7 @@
 import axios from 'react-native-axios';
 import UserService from './user.service';
 
-const API_URL = 'http://192.168.0.11:8080/api/admin/';
+const API_URL = 'http://192.168.1.20:8080/api/admin/';
 
 class AdminService {
   async setHeaders() {

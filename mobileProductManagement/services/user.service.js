@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {decode as atob, encode as btoa} from 'base-64';
 import {EventEmitter} from 'events';
 
-const API_URL = 'http://192.168.0.11:8080/api/user/';
+const API_URL = 'http://192.168.1.20:8080/api/user/';
 var currentUserSubject = new BehaviorSubject(null);
 
 const emitter = new EventEmitter();

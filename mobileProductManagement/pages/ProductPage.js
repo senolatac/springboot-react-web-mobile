@@ -21,33 +21,38 @@ export default class ProductPage extends Component {
   }
 
   componentDidMount() {
-    UserService.findAllProducts().then(products => {
-      this.setState({
-        products: products.data,
-        loading: false,
+    UserService.findAllProducts()
+      .then(products => {
+        this.setState({
+          products: products.data,
+          loading: false,
+        });
+      })
+      .catch(e => {
+        console.log(e);
       });
-    });
   }
 
   renderItem(itemProduct) {
     const {item} = itemProduct;
     return (
       <ListItem
-        title={
-          <Text style={styles.productTitle}>
-            {item.name + ' ($ ' + item.price + ')'}
-          </Text>
-        }
-        subtitle={item.explanation}
+        key={item.id}
         leftIcon={{name: 'pin-drop'}}
         onPress={() =>
           this.props.navigation.navigate('Detail', {
             productId: item.id,
             product: item,
           })
-        }
-        chevron
-      />
+        }>
+        <ListItem.Content>
+          <ListItem.Title style={styles.productTitle}>
+            {item.name + ' ($ ' + item.price + ')'}
+          </ListItem.Title>
+          <ListItem.Subtitle>{item.explanation}</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
     );
   }
 
@@ -62,6 +67,7 @@ export default class ProductPage extends Component {
         {!this.state.loading && (
           <FlatList
             data={this.state.products}
+            keyExtractor={t => t.id}
             renderItem={item => this.renderItem(item)}
           />
         )}
