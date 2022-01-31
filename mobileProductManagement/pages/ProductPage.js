@@ -37,22 +37,21 @@ export default class ProductPage extends Component {
     const {item} = itemProduct;
     return (
       <ListItem
-        key={item.id}
+        title={
+          <Text style={styles.productTitle}>
+            {item.name + ' ($ ' + item.price + ')'}
+          </Text>
+        }
+        subtitle={item.explanation}
         leftIcon={{name: 'pin-drop'}}
         onPress={() =>
           this.props.navigation.navigate('Detail', {
             productId: item.id,
             product: item,
           })
-        }>
-        <ListItem.Content>
-          <ListItem.Title style={styles.productTitle}>
-            {item.name + ' ($ ' + item.price + ')'}
-          </ListItem.Title>
-          <ListItem.Subtitle>{item.explanation}</ListItem.Subtitle>
-        </ListItem.Content>
-        <ListItem.Chevron />
-      </ListItem>
+        }
+        chevron
+      />
     );
   }
 
